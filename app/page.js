@@ -1,91 +1,86 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+function HomePage() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="images/carousel1.jpg" class="d-block w-100 overlay" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+              <h3 class>Burgers are our love language</h3>
+              <p>extra cheese, please</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/carousel2.jpg" class="d-block w-100 overlay" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Nothing brings people together like good pasta</h5>
+              <p>Mamma mia!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/carousel3.jpg" class="d-block w-100 overlay" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>having a bad day? here, have a pizza</h5>
+              <p>a little slice of heaven</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class='container'>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-4">
+            <h1 class="text">Our Best Sellers</h1>
+          </div>
+          <div class="col-lg-7">
+            <div class="row m-5">
+              <div class="col card me-5">
+                <img src="images/burger.jpg" class="card-img-top" alt="cheese burger" />
+                <div class="card-body">
+                  <p class="card-text text text-dark text-center">Cheese Burger</p>
+                </div>
+              </div>
+              <div class="col card">
+                <img src="images/pizza.jpg" class="card-img-top" alt="pizza pepperoni" />
+                <div class="card-body">
+                  <p class="card-text text text-dark text-center">Pepperoni Pizza</p>
+                </div>
+              </div>
+              <div class="row m-5">
+                <div class="col card me-5">
+                  <img src="images/pestopasta1.jpg" class="card-img-top" alt="pesto pasta" />
+                  <div class="card-body">
+                    <p class="card-text text text-dark text-center">Pesto Pasta</p>
+                  </div>
+                </div>
+
+                <div class="col card me-5">
+                  <img src="images/sushi.jpg" class="card-img-top" alt="pesto pasta" />
+                  <div class="card-body">
+                    <p class="card-text text text-dark text-center">Sushi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+ 
+    </>
+  );
 }
+export default HomePage;
+
+
