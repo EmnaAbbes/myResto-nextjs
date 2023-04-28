@@ -57,7 +57,9 @@ a {
     color-scheme: dark;
   }
 }
-
+.user{
+  font-size: 20px;
+}
 .appBar {
   background-color: #a58c85;
   color: #f2d2ca;
@@ -74,7 +76,6 @@ a {
   font-family: 'Amatic SC';
   font-size: 27px;
   font-weight: 500;
-
 }
 
 .overlay {
@@ -115,9 +116,10 @@ a {
 .card-details{
   margin-top: 120px;
 }
-.food-delivery{
-  margin-left: 300px;
-}
+
 .bg{
   background-color: #eee;
+}
+.shoppingcart{
+  width: 400px;
 }
