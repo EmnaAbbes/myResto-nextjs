@@ -5,7 +5,7 @@ const DisProductsTable = dynamic(() =>
     ssr: false,
 })
 async function getProducts() {
-    const res = await fetch(`http://localhost:3005/api/products?timestamp=${new Date().getTime()}`)
+    const res = await fetch(`https://my-resto-nodejs.vercel.app/api/products?timestamp=${new Date().getTime()}`)
     const products = await res.json();
     return products;
 }

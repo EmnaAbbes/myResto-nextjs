@@ -5,7 +5,7 @@ const DisTableCategories = dynamic(() =>
     loading: () => 'Loading...', ssr: false,
 })
 async function getProducts() {
-    const res = await fetch(`http://localhost:3005/api/categories?timestamp=${new Date().getTime()}`)
+    const res = await fetch(`https://my-resto-nodejs.vercel.app/api/categories?timestamp=${new Date().getTime()}`)
     const categories = await res.json();
     return categories;
 }

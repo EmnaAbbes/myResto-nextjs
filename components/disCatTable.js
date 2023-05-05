@@ -8,7 +8,7 @@ import UpdateCategory from './updateCategory';
 const disTableCategories = (props) => {
     const [categories, setCategories] = React.useState(props.categories)
     const getCategories = async () => {
-        const res = await fetch('http://localhost:3005/api/categories')
+        const res = await fetch('https://my-resto-nodejs.vercel.app/api/categories')
         const categories = await res.json();
         setCategories(categories)
     }

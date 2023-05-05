@@ -12,7 +12,7 @@ export default NextAuth({
                 const { email, password } = credentials;
                 console.log(email, password)
 
-                const res = await axios.post('http://localhost:3005/api/users/login', {
+                const res = await axios.post('https://my-resto-nodejs.vercel.app/api/users/login', {
                     email,
                     password,
                 })

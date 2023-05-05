@@ -41,7 +41,7 @@ function AjoutCat() {
             image: url,
         };
         const res = await (await
-            fetch('http://localhost:3005/api/categories', {
+            fetch('https://my-resto-nodejs.vercel.app/api/categories', {
                 method: 'POST',
                 body: JSON.stringify(cat),
                 headers: {

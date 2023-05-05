@@ -2,12 +2,12 @@ import React, { Suspense } from "react";
 import ProductList from '@/components/productList';
 import CategoryList from '@/components/categoryList';
 async function getProducts() {
-    const res = await fetch(`http://localhost:3005/api/products?timestamp=${new Date().getTime()}`)
+    const res = await fetch(`https://my-resto-nodejs.vercel.app/api/products?timestamp=${new Date().getTime()}`)
     const products = await res.json();
     return products;
 }
 async function getCategries() {
-    const res = await fetch(`http://localhost:3005/api/categories?timestamp=${new Date().getTime()}`)
+    const res = await fetch(`https://my-resto-nodejs.vercel.app/api/categories?timestamp=${new Date().getTime()}`)
     const categories = await res.json();
     return categories;
 }
