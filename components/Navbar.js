@@ -65,8 +65,12 @@ export default function ButtonAppBar() {
                                 }
                             </>
 
-                        ) : <Button sx={{ bgcolor: "#a58c85", color: "#f2d2ca", fontWeight: "500", fontSize: 27 }} onClick={() =>
+                        ) : <div>
+                        <Button sx={{ bgcolor: "#a58c85", color: "#f2d2ca", fontWeight: "500", fontSize: 27 }} onClick={() =>
+                            router.push('/signup')}>Sign Up</Button>
+                        <Button sx={{ bgcolor: "#a58c85", color: "#f2d2ca", fontWeight: "500", fontSize: 27 }} onClick={() =>
                             router.push('/login')}>Login</Button>
+                            </div>
                         }
                     </Toolbar>
                 </AppBar>

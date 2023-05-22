@@ -1,6 +1,5 @@
 'use client';
 
-
 function ProductLayout({ children }) {
     return (
         <div>
