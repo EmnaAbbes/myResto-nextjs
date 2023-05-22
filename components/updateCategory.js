@@ -53,7 +53,7 @@ function updateCategory(props) {
         };
 
         const res = await (await
-            fetch('http://localhost:3005/api/categories/' + id, {
+            fetch('https://my-resto-nodejs.vercel.app/api/categories/' + id, {
                 method: 'PUT',
                 body: JSON.stringify(cat),
                 headers: {

@@ -9,7 +9,8 @@ const signUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const submitHandler = async () => {
+    const submitHandler =  async (e) => {
+        e.preventDefault();
         const u = {
             name: name,
             email: email,

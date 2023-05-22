@@ -20,7 +20,7 @@ const disTableCategories = (props) => {
         if (window.confirm("Are you sure to delete the category?")) {
             console.log(id)
             const res = await (await
-                fetch('http://localhost:3005/api/categories/' + id, {
+                fetch('https://my-resto-nodejs.vercel.app/api/categories/' + id, {
                     method: "DELETE"
                 })).json();
             if (res) {

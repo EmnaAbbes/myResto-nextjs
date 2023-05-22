@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React,{ useState,useEffect } from 'react'; 
 import { TextField, Box, Button, Modal, Typography } from '@mui/material';
+import ChangeCircleRoundedIcon from '@mui/icons-material/ChangeCircleRounded';
 import { FilePond, registerPlugin } from 'react-filepond'
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
@@ -8,14 +9,15 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 import { UploadFirebase } from '../utils/UploadFirebase';
+
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 550,
-    height: 550,
-    maxHeight: 550,
+    height: 600,
+    maxHeight: 600,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -24,32 +26,44 @@ const style = {
     padding: '40px 30px 60px',
     textAlign: 'center',
 };
-function AjoutCat() {
+function UpdateProduct(props) {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [file, setFile] = useState("");
-    const [name, setName] = useState("");
-    const [image, setImage] = useState("");
+    const [id, setId] = useState();
+    const [file, setFile] = useState();
+    const [name, setName] = useState();
+    const [image, setImage] = useState();
+    const [price, setPrice] = useState();
+    useEffect(() => {
+        setId(props.products._id);
+        setName(props.products.designation);
+        setPrice(props.products.price);
+        setImage(props.products.productImg);
+    }, []);
 
     const handlesave = async (url) => {
+
         setImage(url);
-        const cat = {
+        const prod = {
+            id: id,
             name: name,
+            price: price,
             image: url,
         };
+
         const res = await (await
-            fetch('https://my-resto-nodejs.vercel.app/api/categories', {
-                method: 'POST',
-                body: JSON.stringify(cat),
+            fetch('https://my-resto-nodejs.vercel.app/api/products' + id, {
+                method: 'PUT',
+                body: JSON.stringify(prod),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })).json()
         if (res) {
-            console.log('successfully inserted!')
+            console.log('successfully updated!')
             handleClose()
         }
         else {
@@ -58,15 +72,13 @@ function AjoutCat() {
     }
     const handleUpload = (event) => {
         event.preventDefault();
-        if (!file[0].file) {
-            alert("Please upload an image first!");
+        if (!file) {
+            const url = image;
+            handlesave(url);
         }
         else {
             console.log(file[0].file)
-            resultHandleUpload(file[0].file, event);
-        }
-        if (!file[0].file) {
-            alert("Please upload an image first!");
+            resultHandleUpload(file[0].file);
         }
     };
     const resultHandleUpload = async (file) => {
@@ -81,12 +93,13 @@ function AjoutCat() {
             console.log(error);
         }
     }
-    return (
-        <div>
-            <Button type="button" className="btn text-light mb-3" onClick={handleOpen} style={{ backgroundColor: '#EA6E6E' }}>
-                ADD
-            </Button>
 
+    return (
+        <>
+            <span onClick={handleOpen}
+                style={{ cursor: 'pointer' }}>
+                <ChangeCircleRoundedIcon sx={{ color: '#84D468', marginRight: 1 }} />
+            </span>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -95,16 +108,17 @@ function AjoutCat() {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Add Category
+                        Update Product
                     </Typography>
                     <hr />
 
                     <div className="mb-4">
-                        <TextField variant="outlined"
-                            label="Name" onChange={e => setName(e.target.value)} />
+                        <TextField variant="outlined" label="Name"
+                            value={name} onChange={e => setName(e.target.value)} />
                     </div>
                     <div className="mb-4">
-                        <h6>Select image</h6>
+                        {!file ? <img src={image} style={{ width: 70, height: 70 }} /> : null}
+                        <h6 className='m-3'>Select new image</h6>
                         <center>
                             <div style={{ width: 200, height: 250 }}>
                                 <FilePond
@@ -112,25 +126,22 @@ function AjoutCat() {
                                     allowMultiple={false}
                                     onupdatefiles={setFile}
                                     labelIdle='<span class="filepond--label-action">Browse One</span>'
-
                                 />
                             </div>
-                        </center>
-                    </div>
-                    <hr />
-                    <div className="mb-3">
-                        <Button type="button" className="btn btn-danger me-2" style={{ backgroundColor: '#EA6E6E',color:'white' }}
-                            onClick={(event) => handleUpload(event)}>Save</Button>
-                        <Button type="button" className="btn btn-secondary" style={{ backgroundColor: '#D5D2D1',color:'black' }}
+                            <div className="mb-3">
+                        <Button type="button" className="btn me-2 text-light" style={{ backgroundColor: "#84D468" }}
+                            onClick={(event) => handleUpload(event)}>Update</Button>
+                        <Button type="button" className="btn text-dark" style={{ backgroundColor: "#B8AEAE" }}
                             onClick={handleClose}>Close</Button>
                     </div>
-
+                        </center>
+                    </div>
+               
+                  
                 </Box>
             </Modal>
-        </div>
+        </>
     )
 }
 
-
-
-export default AjoutCat 
+export default UpdateProduct
