@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { TextField, Box, Button, Modal, Typography } from '@mui/material';
+import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box, Button, Modal, Typography } from '@mui/material';
 import { FilePond, registerPlugin } from 'react-filepond'
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
@@ -34,18 +35,34 @@ function AjoutProd() {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [image, setImage] = useState("");
+    const [categories, setCategories] = useState([]);
+    const [categorieID, setCategorieID] = useState("");
+
+    useEffect(() => {
+        const getCat=async()=>{
+            const res = await fetch('https://my-resto-nodejs.vercel.app/api/categories')
+            const categories = await res.json();
+            setCategories(categories)
+            setCategorieID(categories[0]._id)
+        }
+        getCat()
+    },[]);
 
     const handlesave = async (url) => {
         setImage(url);
-        const cat = {
-            name: name,
+        const prod = {
+            designation: name,
             price: price,
-            image: url,
+            productImg: url,
+            categoryID:categorieID
+
         };
+    
+       
         const res = await (await
             fetch('https://my-resto-nodejs.vercel.app/api/products', {
                 method: 'POST',
-                body: JSON.stringify(cat),
+                body: JSON.stringify(prod),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -83,6 +100,10 @@ function AjoutProd() {
             console.log(error);
         }
     }
+const handleCategoryChange=(e)=>{
+    setCategorieID(e.target.value)
+}
+
     return (
         <div>
             <Button type="button" className="btn text-light mb-3" onClick={handleOpen} style={{ backgroundColor: '#EA6E6E' }}>
@@ -101,6 +122,23 @@ function AjoutProd() {
                     </Typography>
                     <hr />
 
+                    <div className="mb-3">
+                    <FormControl>
+                <InputLabel id="categorie-label">Category</InputLabel>
+                <Select
+                    labelId="categorie-label"
+                    name="categorieID"
+                    value={categorieID}
+                    onChange={handleCategoryChange}
+                >
+                    {categories.map((category) => (
+                        <MenuItem key={category._id} value={category._id}>
+                            {category.categoryName}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+                    </div>
                     <div className="mb-3">
                         <TextField variant="outlined"
                             label="Name" onChange={e => setName(e.target.value)} />
@@ -122,18 +160,18 @@ function AjoutProd() {
                                 />
                             </div>
                             <div className="mb-5">
-                               
-                        <Button type="button" className="btn btn-danger me-2 mb-5"
-                           style={{ backgroundColor: '#EA6E6E',color:'white' }} onClick={(event) => handleUpload(event)}>Save</Button>
-                        <Button type="button" className="btn btn-secondary mb-5"  style={{ backgroundColor: '#D5D2D1',color:'black' }} 
-                            onClick={handleClose}>Close</Button>
-                    </div>
+
+                                <Button type="button" className="btn btn-danger me-2 mb-5"
+                                    style={{ backgroundColor: '#EA6E6E', color: 'white' }} onClick={(event) => handleUpload(event)}>Save</Button>
+                                <Button type="button" className="btn btn-secondary mb-5" style={{ backgroundColor: '#D5D2D1', color: 'black' }}
+                                    onClick={handleClose}>Close</Button>
+                            </div>
                         </center>
-                       
+
                     </div>
-               
+
                     <hr />
-                   
+
 
                 </Box>
             </Modal>

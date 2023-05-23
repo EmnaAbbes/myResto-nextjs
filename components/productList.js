@@ -34,7 +34,7 @@ const ProductsPage = ({ product }) => {
                     <img
                         src={product.productImg}
                         className="card-img-top p-4 prod-img"
-                        height={250}
+                        height={300}
                         width={100}
                         alt={product.designation}
                     />
